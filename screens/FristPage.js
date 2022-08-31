@@ -12,26 +12,18 @@ const FristPage = ({ navigation }) => {
   const [postText, setPostText] = React.useState("");
   return (
     <>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.heading}>THAI-NICHI Institute of Technology</Text>
-          <Text>Plese insert your name to pass it to second screen</Text>
-          <TextInput
-            style={styles.textStyle}
-            multiline
-            placeholder="Plese text here"
-            onChangeText={setPostText}
-            value={postText}
-          />
-          <Button
-            title="Go Next"
-            onPress={() => navigation.navigate("Second", { post: postText })}
-          />
-        </View>
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <Text>www.tni.ac.th</Text>
-      </View>
+    
+    <View>
+      <Text>This is the First Page</Text>
+        <Button
+        title="Go to secondPage"
+        onPress={() => navigation.navigate("SecondPage")}
+        />
+        <Button
+          title='Go to ThirdPage'
+          onPress={() => navigation.navigate("Third Page")}
+        />
+    </View>
     </>
   );
 };
