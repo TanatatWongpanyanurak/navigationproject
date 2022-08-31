@@ -1,33 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Button,TextInput } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
+import React from "react";
 
-import {NavigationContainer} from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import React from 'react';
-// import FristPage from './screens/FristPage';
-// import SecondPage from './screens/SecondPage';
-import FirstPage from './pages/FirstPage';
-import SecondPage from './pages/SecondPage';
-import ThirdPage from './pages/ThirdPage';
-
-
-const Stack = createNativeStackNavigator()
-
-export default function App() {
+function FeedScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator 
-      initialRouteName='FirstPage'
-      screenOptions={{
-        headerStyle:{backgroundColor:'#778899'},
-        headerTintColor:'#f8f8ff',
-        headerTitleStyle:{fontWeight:'bold'}
-      }}
-      >
-        <Stack.Screen name ='First Page' component={FirstPage}/>
-        <Stack.Screen name ='Second Page' component={SecondPage}/>
-        <Stack.Screen name = 'Third Page' component={ThirdPage}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Feed Screen</Text>
+    </View>
   );
 }
+function ArticleScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Article Screen</Text>
+    </View>
+  );
+}
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Help" onPress={() => alert("Link to help")} />
+    </DrawerContentScrollView>
+  );
+}
+const Drawer = createDrawerNavigator();
+
+function MyDrawer (){
+  return(
+    <Drawer.Navigator useLegacyImplementation
+      drawerContent={(props)=><CustomDrawerContent{...props}/>}
+        screenOptions ={{
+          drawerStyle:{
+            backgroundColor:'pink',
+            width:240
+          }
+        }}>
+        <Drawer.Screen name="Feed" component={FeedScreen} />
+        <Drawer.Screen name="Article" component={ArticleScreen} />
+      </Drawer.Navigator>
+  );
+}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <MyDrawer/>
+    </NavigationContainer>
+  );
+};
+
+export default App;
+
+const styles = StyleSheet.create({});
